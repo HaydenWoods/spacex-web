@@ -1,0 +1,59 @@
+.flightPage .top {
+	height: 200px;
+	width: calc(100% - 100px);
+	padding: 50px;
+	position: relative;
+}
+
+.flightPage .top h1 {
+	font-size: 48px;
+	color: #fff;
+	font-family: sans-serif;
+	font-weight: 400;
+	text-align: center;
+}
+.flightPage .top h2 {
+	font-size: 32px;
+	color: #fff;
+	font-family: sans-serif;
+	font-weight: 300;
+	text-align: center;
+	padding-top: 5px;
+}
+.flightPage .top h3 {
+	font-size: 20px;
+	color: #fff;
+	font-family: sans-serif;
+	font-weight: 300;
+	text-align: center;
+	padding-top: 10px;
+}
+
+.flightPage .top .social-bar {
+	height: 35px;
+	width: calc(100% - 100px);
+	position: absolute;
+	bottom: 50px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: nowrap;
+}
+
+.flightPage .top .social-bar .social-item {
+	height: 100%;
+	width: 35px;
+	padding: 0px 5px 0px 5px;
+}
+
+.flightPage .top .social-bar .social-item img {
+	width: 100%;
+	height: 100%;
+	opacity: 0.8;
+	filter: brightness(0) invert(1);
+	cursor: pointer;
+}
+
+.flightPage .top .social-bar .social-item:hover img {
+	opacity: 0.95;
+}

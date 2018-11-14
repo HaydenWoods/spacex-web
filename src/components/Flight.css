@@ -1,0 +1,109 @@
+.flightList {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: top;
+	align-content: flex-start;
+}
+
+.flight {
+	width: 240px;
+	margin: 15px;
+	border-radius: 5px;
+	flex-grow: 1;
+}
+
+.flight .top {
+	min-height: 120px;
+	width: calc(100%-40px);
+	padding: 20px;
+	background: #0097e6;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.flight .bottom {
+	width: calc(100%-40px);
+	border: 0px solid #ccc;
+	border-top: none;
+	border-radius: 0px 0px 5px 5px;
+	background: #f5f6fa;
+}
+
+/* Flight Title */
+.flight h1 {
+	width: 100%;
+	height: 1.2em;
+	font-size: 24px;
+	font-family: sans-serif;
+	color: #f5f6fa;
+	font-weight: 400;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+/* Number */
+.flight h2 {
+	font-size: 20px;
+	font-family: sans-serif;
+	color: #f5f6fa;
+	font-weight: 400;
+	text-align: center;
+	padding-bottom: 15px;
+}
+
+/* Rocket Type */
+.flight h3 {
+	font-size: 20px;
+	font-family: sans-serif;
+	color: #fff;
+	font-weight: 300;
+	text-align: center;
+	padding-top: 2px;
+}
+
+/* Date */
+.flight h4 {
+	font-size: 16px;
+	font-family: sans-serif;
+	color: #f5f6fa;
+	font-weight: 400;
+	text-align: center;
+	padding-top: 10px;
+}
+
+.flight .social-bar {
+	height: 30px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: nowrap;
+
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+	position: relative;
+	bottom: 0;
+}
+
+.flight .social-bar .social-item {
+	height: 100%;
+	width: 30px;
+	padding: 0px 5px 0px 5px;
+}
+
+.flight .social-bar .social-item img {
+	width: 100%;
+	height: 100%;
+	opacity: 0.6;
+	filter: grayscale(100%);
+	cursor: pointer;
+}
+
+.flight .social-bar .social-item:hover img {
+	filter: none;
+	opacity: 0.95;
+}
