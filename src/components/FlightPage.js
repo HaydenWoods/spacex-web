@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import moment from "moment";
 
 import redditLogo from '../images/social/reddit.png';
 import youtubeLogo from '../images/social/youtube.png';
@@ -10,7 +11,7 @@ import './FlightPage.css';
 
 class FlightPage extends Component {
 	state = {
-		flight:{}
+		flight: {}
 	}
 
 	componentDidMount() {
@@ -28,6 +29,10 @@ class FlightPage extends Component {
                 launchSuccess: f.launch_success,
                 landIntent: f.rocket.first_stage.cores[0].landing_intent,
                 landSuccess: f.rocket.first_stage.cores[0].land_success,
+
+                payloadName: f.rocket.second_stage.payloads[0].payload_id,
+                payloadType: f.rocket.second_stage.payloads[0].payload_type,
+                payloadMass: f.rocket.second_stage.payloads[0].payload_mass_kg,
 
                 reddit: f.links.reddit_launch,
                 wiki: f.links.wikipedia,
@@ -65,27 +70,23 @@ class FlightPage extends Component {
 			background = undecided;
 		}
 
-		console.log(background);
-
 		var style = {
 			background: background,
 		};
-
-		console.log(style);
 
 		return (
 			<div className="flightPage">
 				<div className="top" style={style}>
 					<h1>{this.state.flight.name}</h1>
 					<h2>{this.state.flight.rocketName}</h2>
-					<h3>{this.state.flight.udate}</h3>
+					<h3>{moment(this.state.flight.udate).format("MMMM Do YYYY, h:mm:ss a")}</h3>
 					
 					<div className="social-bar">
 						{ this.state.flight.reddit 
 							?
-							<a href={this.state.flight.reddit}>
+							<a target="_blank" href={this.state.flight.reddit}>
 								<div className="social-item">
-									<img src={redditLogo}/>
+									<img src={redditLogo} alt=""/>
 								</div>
 							</a>
 							:
@@ -94,9 +95,9 @@ class FlightPage extends Component {
 
 						{ this.state.flight.youtube 
 							?
-							<a href={this.state.flight.youtube}>
+							<a target="_blank" href={this.state.flight.youtube}>
 								<div className="social-item">
-									<img src={youtubeLogo}/>
+									<img src={youtubeLogo} alt=""/>
 								</div>
 							</a>
 							:
@@ -105,9 +106,9 @@ class FlightPage extends Component {
 
 						{ this.state.flight.wiki 
 							?
-							<a href={this.state.flight.wiki}>
+							<a target="_blank" href={this.state.flight.wiki}>
 								<div className="social-item">
-									<img src={wikiLogo}/>
+									<img src={wikiLogo} alt=""/>
 								</div>
 							</a>
 							:
@@ -116,8 +117,28 @@ class FlightPage extends Component {
 					</div>
 				</div>
 
-				<div className="bottom">
+				<div className="restrict-1000">
+					<div className="bottom">
+						{ this.state.flight.payloadName
+							?
+							<div className="content-box">
+								<h1>Payload Data</h1>
+								<ul>
+									<li>Payload Name: { this.state.flight.payloadName }</li>
+									<li>Payload Type: { this.state.flight.payloadType }</li>
+									<li>Payload Mass: { this.state.flight.payloadMass }kg</li>
+								</ul>
+							</div>
+							:
+							null
+						}
+						<div className="content-box">
 
+						</div>
+						<div className="content-box">
+
+						</div>
+					</div>
 				</div>
 			</div>
 		)

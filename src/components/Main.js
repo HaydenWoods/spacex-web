@@ -6,7 +6,10 @@ import './Main.css';
 
 class Main extends Component {
     state = {
-        flights: []
+        flights: [],
+        search: "",
+        searchResults: [],
+        isloading: true,
     };
 
     componentDidMount() {
@@ -33,16 +36,52 @@ class Main extends Component {
                 return flight
             });
 
-            this.setState({flights});
+            this.setState({flights, isloading: false});
         })
-        .catch(error => console.log(error));
+        .catch(error => this.setState({error}));
+    }
+
+    handleSearch(e) {
+        const search = e.target.value;
+        if (search) {
+            const searchResults = this.state.flights.filter((flight, i) => {
+                console.log(flight.name)
+                if (flight.name.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                    return true
+                } 
+
+                if (flight.num == search) {
+                    return true
+                }
+
+                return false
+            })
+            this.setState({search, searchResults})
+        } else {
+            this.setState({search})
+        }
     }
 
     render() {
+        const {isloading, error, search, searchResults, flights} = this.state;    
         return (
             <div className="restrict-1000">
                 <div className="main">
-                    <FlightList flights={this.state.flights}/>
+                    <input onChange={this.handleSearch.bind(this)} className="search" type="text" name="search" placeholder="Search..." autoComplete="off"/>
+                    { isloading ?  
+                        <div className="loading">
+                            Loading...
+                        </div>
+                        :
+                        null
+                    }
+                    { error && !isloading ?  
+                        <div className="error">
+                            {this.state.error}
+                        </div>
+                        :
+                        <FlightList flights={search ? searchResults : flights}/>
+                    }
                 </div>
             </div>
         );

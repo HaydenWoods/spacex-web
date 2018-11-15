@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import moment from "moment";
 
 import redditLogo from '../images/social/reddit.png';
 import youtubeLogo from '../images/social/youtube.png';
@@ -46,17 +47,17 @@ class Flight extends Component {
 						<h2>{this.props.flight.num}</h2>
 						<h1>{this.props.flight.name}</h1>
 						<h3>{this.props.flight.rocketName}</h3>
-						<h4>{this.props.flight.udate}</h4>
+						<h4>{moment(this.props.flight.udate).format("MMMM Do YYYY, h:mm:ss a")}</h4>
 					</div>
 				</Link>
 
-				<div className="bottom">
+				<div className="bottom" style={style}>
 					<div className="social-bar">
 						{ this.props.flight.reddit 
 							?
-							<a href={this.props.flight.reddit}>
+							<a target="_blank" href={this.props.flight.reddit}>
 								<div className="social-item">
-									<img src={redditLogo}/>
+									<img src={redditLogo} alt=""/>
 								</div>
 							</a>
 							:
@@ -65,9 +66,9 @@ class Flight extends Component {
 
 						{ this.props.flight.youtube 
 							?
-							<a href={this.props.flight.youtube}>
+							<a target="_blank" href={this.props.flight.youtube}>
 								<div className="social-item">
-									<img src={youtubeLogo}/>
+									<img src={youtubeLogo} alt=""/>
 								</div>
 							</a>
 							:
@@ -76,9 +77,9 @@ class Flight extends Component {
 
 						{ this.props.flight.wiki 
 							?
-							<a href={this.props.flight.wiki}>
+							<a target="_blank" href={this.props.flight.wiki}>
 								<div className="social-item">
-									<img src={wikiLogo}/>
+									<img src={wikiLogo} alt=""/>
 								</div>
 							</a>
 							:

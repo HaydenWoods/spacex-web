@@ -3,19 +3,21 @@
 	width: calc(100% - 100px);
 	padding: 50px;
 	position: relative;
+
+	-webkit-box-shadow: inset 0px -18px 94px -35px rgba(0,0,0,0.2);
+	-moz-box-shadow: inset 0px -18px 94px -35px rgba(0,0,0,0.2);
+	box-shadow: inset 0px -18px 94px -35px rgba(0,0,0,0.2);
 }
 
 .flightPage .top h1 {
 	font-size: 48px;
 	color: #fff;
-	font-family: sans-serif;
-	font-weight: 400;
+	font-weight: 500;
 	text-align: center;
 }
 .flightPage .top h2 {
 	font-size: 32px;
 	color: #fff;
-	font-family: sans-serif;
 	font-weight: 300;
 	text-align: center;
 	padding-top: 5px;
@@ -23,10 +25,10 @@
 .flightPage .top h3 {
 	font-size: 20px;
 	color: #fff;
-	font-family: sans-serif;
 	font-weight: 300;
 	text-align: center;
 	padding-top: 10px;
+	font-family: sans-serif;
 }
 
 .flightPage .top .social-bar {
@@ -56,4 +58,43 @@
 
 .flightPage .top .social-bar .social-item:hover img {
 	opacity: 0.95;
+}
+
+.flightPage .bottom {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: top;
+	align-content: flex-start;
+	padding-bottom: 20px;
+}
+
+.flightPage .bottom .content-box {
+	min-height: calc(200px - 40px);
+	width: calc(500px - 80px);
+	padding: 20px;
+	background: #f5f6fa;
+	margin: 20px 20px 0px 20px;
+	flex-grow: 0;
+	border-radius: 5px;
+}
+
+.flightPage .bottom .content-box:nth-child(2n-1) {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.flightPage .bottom .content-box:nth-child(2n) {
+	margin-right: 0px;
+}
+
+.flightPage .bottom .content-box h1 {
+	font-size: 24px;
+	padding-bottom: 10px;
+}
+
+.flightPage .bottom .content-box ul {
+	font-size: 16px;
+	line-height: 22px;
 }

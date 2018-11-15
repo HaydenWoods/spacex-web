@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Redirect, Switch, withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Main from "./components/Main.js"
 import FlightPage from "./components/FlightPage.js"
