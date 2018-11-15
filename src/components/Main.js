@@ -50,7 +50,7 @@ class Main extends Component {
                     return true
                 } 
 
-                if (flight.num == search) {
+                if (flight.num.toString() === search) {
                     return true
                 }
 
