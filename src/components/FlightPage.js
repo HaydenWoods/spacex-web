@@ -84,7 +84,7 @@ class FlightPage extends Component {
 					<div className="social-bar">
 						{ this.state.flight.reddit 
 							?
-							<a target="_blank" href={this.state.flight.reddit}>
+							<a target="_blank" rel="noopener noreferrer" href={this.state.flight.reddit}>
 								<div className="social-item">
 									<img src={redditLogo} alt=""/>
 								</div>
@@ -95,7 +95,7 @@ class FlightPage extends Component {
 
 						{ this.state.flight.youtube 
 							?
-							<a target="_blank" href={this.state.flight.youtube}>
+							<a target="_blank" rel="noopener noreferrer" href={this.state.flight.youtube}>
 								<div className="social-item">
 									<img src={youtubeLogo} alt=""/>
 								</div>
@@ -106,7 +106,7 @@ class FlightPage extends Component {
 
 						{ this.state.flight.wiki 
 							?
-							<a target="_blank" href={this.state.flight.wiki}>
+							<a target="_blank" rel="noopener noreferrer" href={this.state.flight.wiki}>
 								<div className="social-item">
 									<img src={wikiLogo} alt=""/>
 								</div>
