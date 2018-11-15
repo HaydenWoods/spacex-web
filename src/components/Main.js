@@ -49,8 +49,8 @@ class Main extends Component {
                 console.log(flight.name)
                 if (flight.name.toLowerCase().indexOf(search.toLowerCase()) > -1) {
                     return true
-                } 
-                if (flight.num == search) {
+                }
+                if (flight.num.toString() === search) {
                     return true
                 }
                 if (flight.rocketName.toLowerCase() == search.toLowerCase() || flight.rocketId == search) {

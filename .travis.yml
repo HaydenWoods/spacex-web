@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - "8.6.0"
+install:
+  - if [[ `npm -v` != 5.7* ]]; then npm install -g npm@'>=5.7.1'; fi
+  - npm install
+#before_script:
+  #- npm --version
+branches:
+  except:
+    - gh-pages
+stages:
+  #- test
+  - build
+jobs:
+  include:
+    #- stage: test
+    #  script:
+        # Run tests
+    #    - npm run test
+    - stage: build
+      script:
+        - npm run build
