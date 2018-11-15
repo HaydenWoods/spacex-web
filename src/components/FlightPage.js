@@ -11,7 +11,8 @@ import './FlightPage.css';
 
 class FlightPage extends Component {
 	state = {
-		flight: {}
+		flight: {},
+		isloading: true,
 	}
 
 	componentDidMount() {
@@ -39,7 +40,7 @@ class FlightPage extends Component {
                 youtube: f.links.video_link,
         	}
 
-        	this.setState({flight})
+        	this.setState({flight, isloading: false})
         })
         .catch(error => console.log(error));
 	}
@@ -74,72 +75,86 @@ class FlightPage extends Component {
 			background: background,
 		};
 
+		const {isloading, error, flight} = this.state;    
+
 		return (
-			<div className="flightPage">
-				<div className="top" style={style}>
-					<h1>{this.state.flight.name}</h1>
-					<h2>{this.state.flight.rocketName}</h2>
-					<h3>{moment(this.state.flight.udate).format("MMMM Do YYYY, h:mm:ss a")}</h3>
-					
-					<div className="social-bar">
-						{ this.state.flight.reddit 
-							?
-							<a target="_blank" href={this.state.flight.reddit}>
-								<div className="social-item">
-									<img src={redditLogo} alt=""/>
-								</div>
-							</a>
-							:
-							null
-						}
+            <div className="flightPage">
+            	{ isloading ?
+	                <div className="loader"></div>
+	                :
+	                null
+	            }
 
-						{ this.state.flight.youtube 
-							?
-							<a target="_blank" href={this.state.flight.youtube}>
-								<div className="social-item">
-									<img src={youtubeLogo} alt=""/>
-								</div>
-							</a>
-							:
-							null
-						}
+	            { error && !isloading ?  
+	                <div className="error">
+	                    { error }
+	                </div>
+	                :
+	                null
+	            }
 
-						{ this.state.flight.wiki 
-							?
-							<a target="_blank" href={this.state.flight.wiki}>
-								<div className="social-item">
-									<img src={wikiLogo} alt=""/>
-								</div>
-							</a>
-							:
-							null
-						}
-					</div>
-				</div>
+	            { !error && !isloading ?
+	            	<div className="container">
+		                <div className="top" style={style}>
+							<h1>{flight.name}</h1>
+							<h2>{flight.rocketName}</h2>
+							<h3>{moment(flight.udate).format("MMMM Do YYYY, h:mm:ss a")}</h3>
+							<div className="social-bar">
+								{ flight.reddit 
+									?
+									<a target="_blank" href={flight.reddit}>
+										<div className="social-item">
+											<img src={redditLogo} alt=""/>
+										</div>
+									</a>
+									:
+									null
+								}
 
-				<div className="restrict-1000">
-					<div className="bottom">
-						{ this.state.flight.payloadName
-							?
-							<div className="content-box">
-								<h1>Payload Data</h1>
-								<ul>
-									<li>Payload Name: { this.state.flight.payloadName }</li>
-									<li>Payload Type: { this.state.flight.payloadType }</li>
-									<li>Payload Mass: { this.state.flight.payloadMass }kg</li>
-								</ul>
+								{ flight.youtube 
+									?
+									<a target="_blank" href={flight.youtube}>
+										<div className="social-item">
+											<img src={youtubeLogo} alt=""/>
+										</div>
+									</a>
+									:
+									null
+								}
+
+								{ flight.wiki 
+									?
+									<a target="_blank" href={flight.wiki}>
+										<div className="social-item">
+											<img src={wikiLogo} alt=""/>
+										</div>
+									</a>
+									:
+									null
+								}
 							</div>
-							:
-							null
-						}
-						<div className="content-box">
-
 						</div>
-						<div className="content-box">
-
+						<div className="restrict-1000">
+							<div className="bottom">
+								{ flight.payloadName
+									?
+									<div className="content-box">
+										<h1>Payload Data</h1>
+										<ul>
+											<li>Payload Name: { flight.payloadName }</li>
+											<li>Payload Type: { flight.payloadType }</li>
+											<li>Payload Mass: { flight.payloadMass }kg</li>
+										</ul>
+									</div>
+									:
+									null
+								}
+							</div>
 						</div>
 					</div>
-				</div>
+					:
+					null
+	            }
 			</div>
 		)
 	}

@@ -74,12 +74,16 @@
 
 /* Date */
 .flight h4 {
+	width: 100%;
 	font-size: 18px;
 	color: #f5f6fa;
 	font-weight: 300;
 	text-align: center;
 	padding-top: 10px;
 	font-family: sans-serif;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .flight .social-bar {

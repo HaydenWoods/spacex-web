@@ -23,6 +23,7 @@ class Main extends Component {
                     udate: f.launch_date_local,
                     upcoming: f.upcoming,
 
+                    rocketId: f.rocket.rocket_id,
                     rocketName: f.rocket.rocket_name,
                     launchSuccess: f.launch_success,
                     landIntent: f.rocket.first_stage.cores[0].landing_intent,
@@ -49,8 +50,10 @@ class Main extends Component {
                 if (flight.name.toLowerCase().indexOf(search.toLowerCase()) > -1) {
                     return true
                 } 
-
                 if (flight.num == search) {
+                    return true
+                }
+                if (flight.rocketName.toLowerCase() == search.toLowerCase() || flight.rocketId == search) {
                     return true
                 }
 
@@ -69,9 +72,7 @@ class Main extends Component {
                 <div className="main">
                     <input onChange={this.handleSearch.bind(this)} className="search" type="text" name="search" placeholder="Search..." autoComplete="off"/>
                     { isloading ?  
-                        <div className="loading">
-                            Loading...
-                        </div>
+                        <div className="loader"></div>
                         :
                         null
                     }
