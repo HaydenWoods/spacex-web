@@ -55,7 +55,7 @@ class Flight extends Component {
 					<div className="social-bar">
 						{ this.props.flight.reddit 
 							?
-							<a target="_blank" href={this.props.flight.reddit}>
+							<a target="_blank" rel="noopener noreferrer" href={this.props.flight.reddit}>
 								<div className="social-item">
 									<img src={redditLogo} alt=""/>
 								</div>
@@ -66,7 +66,7 @@ class Flight extends Component {
 
 						{ this.props.flight.youtube 
 							?
-							<a target="_blank" href={this.props.flight.youtube}>
+							<a target="_blank" rel="noopener noreferrer" href={this.props.flight.youtube}>
 								<div className="social-item">
 									<img src={youtubeLogo} alt=""/>
 								</div>
@@ -77,7 +77,7 @@ class Flight extends Component {
 
 						{ this.props.flight.wiki 
 							?
-							<a target="_blank" href={this.props.flight.wiki}>
+							<a target="_blank" rel="noopener noreferrer" href={this.props.flight.wiki}>
 								<div className="social-item">
 									<img src={wikiLogo} alt=""/>
 								</div>
