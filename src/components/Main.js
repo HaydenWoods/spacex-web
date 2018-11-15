@@ -53,7 +53,7 @@ class Main extends Component {
                 if (flight.num.toString() === search) {
                     return true
                 }
-                if (flight.rocketName.toLowerCase() == search.toLowerCase() || flight.rocketId == search) {
+                if (flight.rocketName.toLowerCase() === search.toLowerCase() || flight.rocketId === search) {
                     return true
                 }
 
