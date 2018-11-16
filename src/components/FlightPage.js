@@ -40,42 +40,31 @@ class FlightPage extends Component {
                 youtube: f.links.video_link,
         	}
 
-        	this.setState({flight, isloading: false})
+        	this.setState({ flight, isloading: false })
         })
         .catch(error => console.log(error));
 	}
 
 	render() {
+		const {isloading, error, flight} = this.state;
+
 		var good = "#2ed573";
-		var ok = "#ffa502";
+		//var ok = "#ffa502";
 		var bad = "#d63031";
 		var undecided = "#1e90ff";
 
-		var background = null;
+		var background = undecided;
 
-		if (this.state.flight.upcoming === false) {
-			if (this.state.flight.launchSuccess === true) {
-				if (this.state.flight.landIntent === true) {
-					if (this.state.flight.landSuccess === true) {
-						background = good;
-					} else if (this.state.flight.landSuccess === false) {
-						background = bad;
-					}
-				} else if (this.state.flight.landIntent === false) {
-					background = ok;	
-				}
-			} else {
-				background = bad;
-			}
-		} else if (this.state.flight.upcoming === true) {
-			background = undecided;
+		//Flight launched colour
+		if (flight.launchSuccess === true) {
+			background = good;
+		} else if (flight.launchSuccess === false) {
+			background = bad;
 		}
 
 		var style = {
 			background: background,
-		};
-
-		const {isloading, error, flight} = this.state;    
+		};   
 
 		return (
             <div className="flightPage">
@@ -96,15 +85,15 @@ class FlightPage extends Component {
 	            { !error && !isloading ?
 	            	<div className="container">
 		                <div className="top" style={style}>
-							<h1>{flight.name}</h1>
-							<h2>{flight.rocketName}</h2>
-							<h3>{moment(flight.udate).format("MMMM Do YYYY, h:mm:ss a")}</h3>
+							<h1>{ flight.name }</h1>
+							<h2>{ flight.rocketName }</h2>
+							<h3>{ moment(flight.udate).format("MMMM Do YYYY, h:mm:ss a") }</h3>
 							<div className="social-bar">
 								{ flight.reddit 
 									?
-									<a target="_blank" rel="noopener noreferrer" href={flight.reddit}>
+									<a target="_blank" rel="noopener noreferrer" href={ flight.reddit }>
 										<div className="social-item">
-											<img src={redditLogo} alt=""/>
+											<img src={ redditLogo } alt=""/>
 										</div>
 									</a>
 									:
@@ -113,9 +102,9 @@ class FlightPage extends Component {
 
 								{ flight.youtube 
 									?
-									<a target="_blank" rel="noopener noreferrer" href={flight.youtube}>
+									<a target="_blank" rel="noopener noreferrer" href={ flight.youtube }>
 										<div className="social-item">
-											<img src={youtubeLogo} alt=""/>
+											<img src={ youtubeLogo } alt=""/>
 										</div>
 									</a>
 									:
@@ -124,9 +113,9 @@ class FlightPage extends Component {
 
 								{ flight.wiki 
 									?
-									<a target="_blank" rel="noopener noreferrer" href={flight.wiki}>
+									<a target="_blank" rel="noopener noreferrer" href={ flight.wiki }>
 										<div className="social-item">
-											<img src={wikiLogo} alt=""/>
+											<img src={ wikiLogo } alt=""/>
 										</div>
 									</a>
 									:

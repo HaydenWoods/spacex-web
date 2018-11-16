@@ -11,29 +11,20 @@ import "./Flight.css";
 
 class Flight extends Component {
 	render() {
+		const flight = this.props.flight;
+
 		var good = "#2ed573";
-		var ok = "#ffa502";
+		//var ok = "#ffa502";
 		var bad = "#d63031";
 		var undecided = "#1e90ff";
 
-		var background = null;
+		var background = undecided;
 
-		if (this.props.flight.upcoming === false) {
-			if (this.props.flight.launchSuccess === true) {
-				if (this.props.flight.landIntent === true) {
-					if (this.props.flight.landSuccess === true) {
-						background = good;
-					} else if (this.props.flight.landSuccess === false) {
-						background = bad;
-					}
-				} else if (this.props.flight.landIntent === false) {
-					background = ok;	
-				}
-			} else {
-				background = bad;
-			}
-		} else if (this.props.flight.upcoming === true) {
-			background = undecided;
+		//Flight launched colour
+		if (flight.launchSuccess === true) {
+			background = good;
+		} else if (flight.launchSuccess === false) {
+			background = bad;
 		}
 
 		var style = {
@@ -42,44 +33,48 @@ class Flight extends Component {
 
 		return (
 			<div className="flight">
-				<Link to={`/flight/${this.props.flight.num}`} style={{ textDecoration: 'none' }}>
-					<div className="top" style={style}>
-						<h2>{this.props.flight.num}</h2>
-						<h1>{this.props.flight.name}</h1>
-						<h3>{this.props.flight.rocketName}</h3>
-						<h4>{moment(this.props.flight.udate).format("MMMM Do YYYY, h:mm:ss a")}</h4>
+				<Link to={`/flight/${flight.num}`} style={{ textDecoration: 'none' }}>
+					<div className="top" style={ style }>
+						<h2>
+							{ flight.num }
+							{ flight.landSuccess ?
+								" - Landed!"
+								:
+								null
+							}
+						</h2>
+						<h1>{ flight.name }</h1>
+						<h3>{ flight.rocketName }</h3>
+						<h4>{ moment(flight.udate).format("MMMM Do YYYY, h:mm:ss a") }</h4>
 					</div>
 				</Link>
 
-				<div className="bottom" style={style}>
+				<div className="bottom" style={ style }>
 					<div className="social-bar">
-						{ this.props.flight.reddit 
-							?
-							<a target="_blank" rel="noopener noreferrer" href={this.props.flight.reddit}>
+						{ flight.reddit ?
+							<a target="_blank" rel="noopener noreferrer" href={ flight.reddit }>
 								<div className="social-item">
-									<img src={redditLogo} alt=""/>
+									<img src={ redditLogo } alt=""/>
 								</div>
 							</a>
 							:
 							null
 						}
 
-						{ this.props.flight.youtube 
-							?
-							<a target="_blank" rel="noopener noreferrer" href={this.props.flight.youtube}>
+						{ flight.youtube ?
+							<a target="_blank" rel="noopener noreferrer" href={ flight.youtube }>
 								<div className="social-item">
-									<img src={youtubeLogo} alt=""/>
+									<img src={ youtubeLogo } alt=""/>
 								</div>
 							</a>
 							:
 							null
 						}
 
-						{ this.props.flight.wiki 
-							?
-							<a target="_blank" rel="noopener noreferrer" href={this.props.flight.wiki}>
+						{ flight.wiki ?
+							<a target="_blank" rel="noopener noreferrer" href={ flight.wiki }>
 								<div className="social-item">
-									<img src={wikiLogo} alt=""/>
+									<img src={ wikiLogo } alt=""/>
 								</div>
 							</a>
 							:
