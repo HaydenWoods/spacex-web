@@ -26,7 +26,21 @@ class Main extends Component {
         search: "",
         searchResults: [],
         isloading: true,
+        advancedSearch: true,
+        filters: {
+            "reddit": false
+        }
     };
+
+    setFilter(e) {
+        const filters = this.state.filters
+        const value = e.target.checked
+        const filtername = e.target.name
+        console.log(filtername, value)
+        filters[filtername] = value
+        this.setState({filters})
+        this.handleSearch(null)
+    }
 
     componentDidMount() {
         axios
@@ -59,44 +73,77 @@ class Main extends Component {
     }
 
     handleSearch(e) {
-        const search = e.target.value;
-        if (search) {
-            const searchResults = this.state.flights.filter((flight, i) => {
-                if (flight.name.toLowerCase().indexOf(search.toLowerCase()) > -1) {
-                    return true
-                }
-                if (flight.num.toString() === search) {
-                    return true
-                }
-                if (flight.rocketName.toLowerCase() === search.toLowerCase() || flight.rocketId.string === search) {
-                    return true
-                }
-                if (moment(flight.udate).format("MMMM").toLowerCase() === search.toLowerCase()) {
-                    return true
-                }
-                if (moment(flight.udate).format("YYYY").toString() === search.toLowerCase().toString()) {
-                    return true
+        let search
+        if (e) {
+            search = e.target.value;
+        }
+
+        if (search || Object.keys(this.state.filters).filter(filter => this.state.filters[filter] === true).length > 0) {
+            let searchResults 
+            searchResults = this.state.flights.filter((flight, i) => {
+                if (search) {
+                    if (flight.name.toLowerCase().indexOf(search.toLowerCase()) > -1) {
+                        return true
+                    }
+                    if (flight.num.toString() === search) {
+                        return true
+                    }
                 }
 
-                return false
+                let filterStatus = Object.keys(this.state.filters).filter((filter, i) => {
+                    const filtervalue = this.state.filters[filter]
+                    if (filtervalue) {
+                        let ret
+                        switch (filter) {
+                            case 'reddit':
+                                ret = flight.reddit !== null
+                                break
+                            default:
+                                break
+                        }
+                        return ret
+                    } else {
+                        return false
+                    }
+                }).length > 0
+
+                console.log(filterStatus)
+
+                return filterStatus
             })
-            this.setState({ search, searchResults })
+
+            console.log(searchResults)
+
+            if (search) {
+                this.setState({ search, searchResults })
+            } else {
+                console.log("here")
+                this.setState({ searchResults })
+            }
         } else {
             this.setState({ search })
         }
     }
 
     render() {
-        const { isloading, error, search, searchResults, flights } = this.state;    
+        const { isloading, error, search, searchResults, flights, advancedSearch } = this.state;    
         return (
             <div className="main">
                 <div className="restrict-1000">
                     <input onChange={ this.handleSearch.bind(this) } className="search" type="text" name="search" placeholder="Search..." autoComplete="off"/>
-                    <div className="advanced-search">Advanced Search</div>
-                    <div className="advanced-menu">
-
-                    </div>
-
+                    { advancedSearch ?
+                        <div className="advanced">
+                            <label htmlFor="reddit">Reddit</label>
+                            <input name="reddit" value={this.state.filters.reddit} type="checkbox" onChange={(e) => this.setFilter(e)} disabled={search !== "" && searchResults.filter((flight) => flight.reddit).length === 0} />
+                        </div> 
+                        :
+                        null
+                    }
+                    { search.length > 0 ?
+                        <div className="search-results">{`${searchResults.length} Result${searchResults.length !== 1 ? "s" : ""}`}</div>
+                        :
+                        null
+                    }
                     { isloading ?  
                         <div className="loader"></div>
                         :
@@ -105,9 +152,11 @@ class Main extends Component {
                     { error && !isloading ?  
                         <div className="error">{ this.state.error }</div>
                         :
-                        <FlightList flights={ search ? searchResults : flights }/>
+                        <div className="container">
+                            <FlightList flights={ search ? searchResults : flights }/>
+                        </div>
                     }
-                </div>
+                </div> 
             </div>
         );
     }
