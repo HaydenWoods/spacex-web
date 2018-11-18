@@ -103,7 +103,7 @@ h1,h2,h3,h4,h5,h6,p,ul,li {
 	border: 1px #666 solid;
 }
 
-.search-results {
+.advanced-search {
 	width: 15%;
 	font-size: 16px;
 	font-family: sans-serif;
@@ -114,39 +114,32 @@ h1,h2,h3,h4,h5,h6,p,ul,li {
 	cursor: pointer;
 	user-select: none;
 }
+.advanced-search:hover {
+	opacity: 1;
+}
 
+.advanced-menu {
+	display: none;
+	height: 100px;
+	width: 100%;
+	background: #fff;
+}
 
+.advanced {
 
+}
 
+.advanced .filters {
+	float: left;
+	width: 160px;
+}
 
+.advanced .filters .filter {
+	margin-bottom: 2px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.advanced .filters .filter label {
+	margin-left: 5px;
+	font-family: Arial, sans-serif;
+	letter-spacing: 0.2px;
+}
