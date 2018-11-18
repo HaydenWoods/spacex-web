@@ -136,7 +136,7 @@ class Main extends Component {
                     return passed
                 });
 
-                return enabledFilters.length > 0 ? filtersMatched.length == enabledFilters.length : true
+                return enabledFilters.length > 0 ? filtersMatched.length === enabledFilters.length : true
             })
 
             console.log(searchResults)
@@ -154,7 +154,7 @@ class Main extends Component {
     }
 
     filterReset(filters) {
-        Object.keys(filters).map(f => {filters[f] = false})
+        Object.keys(filters).map(f => filters[f] = false)
         console.log(filters)
         return filters
     }
@@ -192,7 +192,7 @@ class Main extends Component {
                         console.log(this.state.filters.rocketType)
                         return (
                             <div className="filter">
-                                <input name={`rocket:${type}`} value={this.state.filters.rocketType ? this.state.filters.rocketType.includes(type) : false} type="checkbox" onChange={(e) => this.setFilter(e)} disabled={search !== "" && searchResults.filter((flight) => flight.rocketName == type).length === 0} />
+                                <input name={`rocket:${type}`} value={this.state.filters.rocketType ? this.state.filters.rocketType.includes(type) : false} type="checkbox" onChange={(e) => this.setFilter(e)} disabled={search !== "" && searchResults.filter((flight) => flight.rocketName === type).length === 0} />
                                 <label htmlFor={`rocket:${type}`}>{type}</label>
                             </div>
                         )
